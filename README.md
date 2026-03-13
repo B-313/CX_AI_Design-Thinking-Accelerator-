@@ -37,8 +37,11 @@ D. The Preliminary questions (section 1) must have selectable button like option
 3.	Region: Country 
 4.	Language: Languages 
 5.	Translation: Ai generated translation required or not for languages other than english. 
+
 E. Prompt bar (Section 3) loads once the user confirms the Preliminary questions, the workspace loads with a prompt bar asking user input to build their website or webpage.  
+
 F. The prompt is articulated by ai to form a brief, preliminary questions are used to personalise this brief. Then the brief is shared with user and asked to confirm whether it is what the user is looking for. This process runs on loop until the user is satisfied with the brief. Each brief is saved in history, per session like an archive.  
+
 G. The workspace refreshes into builder (section 4): 
 1.	workspace has multiple design layout options.  
 2.	user can select a layout for a particular webpage. Add webpages for website etc. 
