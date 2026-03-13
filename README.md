@@ -50,9 +50,13 @@ G. The workspace refreshes into builder (section 4):
 5.	A preview section to view the built work (draft not pubished) 
  
 H. The builder (section 4) has a grammar checker and compliance checker running in parallel to ensure the build meets company standards. 
-I. The progress bar also tracks overall progress so no steps are missed.  
-J. Once the website or webpage is created, confirmed by the user, there is a review button on the left (section 5). Ai makes verification checks and shares a final preview of the website/page to the the user. 
-K. Once the user validates final changes, a section for Send to Review Team opens. The user checks terms and condition and then the website/ webpage is sent to the IT reviewing team. 
-L. Add "Save/Load Session" in workspace. 
-M. Progress bar shows % complete + "Next: X" - eliminates confusion 
 
+I. The progress bar also tracks overall progress so no steps are missed.  
+
+J. Once the website or webpage is created, confirmed by the user, there is a review button on the left (section 5). Ai makes verification checks and shares a final preview of the website/page to the the user. 
+
+K. Once the user validates final changes, a section for Send to Review Team opens. The user checks terms and condition and then the website/ webpage is sent to the IT reviewing team. 
+
+L. Add "Save/Load Session" in workspace. 
+
+M. Progress bar shows % complete + Status Update.
