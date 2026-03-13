@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Thinking Accelerator · Pfizer Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pfizer-blue: #0093D0;
+  --pfizer-dark: #003087;
+  --pfizer-deeper: #001f5c;
+  --pfizer-light: #E3F4FC;
+  --pfizer-mid: #B8E0F5;
+  --white: #FFFFFF;
+  --grey-50: #F8FAFD;
+  --grey-100: #F0F4F9;
+  --grey-200: #E2EAF3;
+  --grey-300: #C8D6E8;
+  --grey-400: #96AEC8;
+  --grey-500: #607D9A;
+  --grey-700: #2D4A6B;
+  --grey-900: #0F1F35;
+  --text: #0F1F35;
+  --text-soft: #3D5A7A;
+  --green: #00924A;
+  --green-light: #E6F7EE;
+  --orange: #E85D00;
+  --orange-light: #FFF0E6;
+  --red: #CC2B2B;
+  --red-light: #FDEAEA;
+  --shadow-xs: 0 1px 3px rgba(0,48,135,0.06);
+  --shadow-sm: 0 2px 8px rgba(0,48,135,0.08);
+  --shadow-md: 0 6px 24px rgba(0,48,135,0.11);
+  --shadow-lg: 0 12px 48px rgba(0,48,135,0.14);
+  --r: 12px;
+  --r-sm: 8px;
+  --r-xs: 5px;
+  --font: 'Source Sans 3', sans-serif;
+  --font-h: 'Nunito', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: var(--font);
+  background: var(--grey-50);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ─── TOPBAR ─── */
+.topbar {
+  height: 56px;
+  background: var(--white);
+  border-bottom: 1px solid var(--grey-200);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 16px;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-xs);
+  z-index: 200;
+}
+.tb-logo {
+  background: var(--pfizer-blue);
+  color: white;
+  font-family: var(--font-h);
+  font-weight: 900;
+  font-size: 14px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+}
+.tb-title {
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--grey-700);
+}
+.tb-sep { width: 1px; height: 20px; background: var(--grey-200); }
+.tb-user-chip {
+  margin-left: auto;
+  display: flex; align-items: center; gap: 8px;
+  background: var(--grey-100);
+  border: 1px solid var(--grey-200);
+  border-radius: 20px;
+  padding: 5px 12px 5px 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--grey-700);
+}
+.tb-avatar {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pfizer-blue), var(--pfizer-dark));
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-h);
+}
+.tb-save-btn {
+  background: none; border: 1.5px solid var(--grey-300);
+  border-radius: 8px; padding: 5px 12px;
+  font: 600 12px var(--font);
+  color: var(--grey-500); cursor: pointer;
+  transition: all .2s;
+  display: flex; align-items: center; gap: 5px;
+}
+.tb-save-btn:hover { border-color: var(--pfizer-blue); color: var(--pfizer-blue); background: var(--pfizer-light); }
+
+/* ─── PROGRESS BAR ─── */
+.progress-bar-outer {
+  height: 44px;
+  background: var(--white);
+  border-bottom: 1px solid var(--grey-200);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 0;
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+.prog-step {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+}
+.prog-dot {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--grey-400);
+  cursor: pointer;
+  transition: all .2s;
+  white-space: nowrap;
+}
+.prog-dot .pnum {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--grey-300);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+  transition: all .2s;
+}
+.prog-step.done .prog-dot { color: var(--pfizer-blue); }
+.prog-step.done .pnum { background: var(--pfizer-blue); border-color: var(--pfizer-blue); color: white; }
+.prog-step.active .prog-dot { color: var(--pfizer-dark); background: var(--pfizer-light); }
+.prog-step.active .pnum { border-color: var(--pfizer-blue); color: var(--pfizer-blue); background: var(--white); }
+.prog-arrow { color: var(--grey-300); font-size: 14px; padding: 0 2px; flex-shrink: 0; }
+.prog-pct {
+  margin-left: auto;
+  font-family: var(--font-h);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--pfizer-blue);
+  white-space: nowrap;
+  padding-left: 16px;
+  flex-shrink: 0;
+}
+.prog-next { font-size: 11px; color: var(--grey-400); font-weight: 400; }
+
+/* ─── MAIN LAYOUT ─── */
+.workspace {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* ─── LEFT SIDEBAR ─── */
+.left-col {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--white);
+  border-right: 1px solid var(--grey-200);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.left-section {
+  padding: 16px 14px 12px;
+  border-bottom: 1px solid var(--grey-100);
+}
+.left-section-title {
+  font-size: 10px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .08em;
+  color: var(--grey-400); margin-bottom: 10px;
+}
+.left-nav-item {
+  display: flex; align-items: center; gap: 9px;
+  padding: 8px 10px;
+  border-radius: var(--r-xs);
+  font-size: 13px; font-weight: 600;
+  color: var(--grey-500);
+  cursor: pointer;
+  transition: all .18s;
+  margin-bottom: 2px;
+  position: relative;
+}
+.left-nav-item:hover { background: var(--grey-100); color: var(--text); }
+.left-nav-item.active { background: var(--pfizer-light); color: var(--pfizer-dark); }
+.left-nav-item.active::before {
+  content: '';
+  position: absolute; left: 0; top: 20%; bottom: 20%;
+  width: 3px; border-radius: 0 2px 2px 0;
+  background: var(--pfizer-blue);
+}
+.left-nav-item .lni { font-size: 15px; width: 20px; text-align: center; }
+.lni-status {
+  margin-left: auto;
+  width: 16px; height: 16px; border-radius: 50%;
+  font-size: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800;
+}
+.s-done { background: var(--green-light); color: var(--green); }
+.s-active { background: var(--pfizer-light); color: var(--pfizer-blue); }
+.s-lock { background: var(--grey-100); color: var(--grey-400); }
+
+.brief-history {
+  flex: 1; overflow-y: auto; padding: 12px 14px;
+}
+.brief-history-title { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--grey-400); margin-bottom: 8px; }
+.brief-item {
+  background: var(--grey-50);
+  border: 1px solid var(--grey-200);
+  border-radius: var(--r-xs);
+  padding: 8px 10px;
+  font-size: 11px;
+  color: var(--grey-500);
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: all .18s;
+}
+.brief-item:hover { border-color: var(--pfizer-blue); color: var(--text); }
+.brief-item .bi-time { font-size: 10px; color: var(--grey-400); margin-bottom: 2px; }
+
+/* ─── CENTER ─── */
+.center-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ─── PANELS (screens) ─── */
+.panel {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+  animation: panelIn .3s ease;
+}
+.panel.active { display: flex; }
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── SCREEN 0: REGISTRATION ─── */
+#screen-reg {
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, var(--pfizer-light) 0%, var(--white) 50%);
+  overflow-y: auto;
+}
+.reg-card {
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--grey-200);
+  padding: 44px 48px;
+  width: 480px;
+  max-width: 95vw;
+}
+.reg-header { text-align: center; margin-bottom: 32px; }
+.reg-icon { font-size: 40px; margin-bottom: 12px; }
+.reg-title { font-family: var(--font-h); font-size: 24px; font-weight: 900; color: var(--pfizer-dark); margin-bottom: 6px; }
+.reg-sub { color: var(--grey-500); font-size: 14px; }
+.form-group { margin-bottom: 18px; }
+.form-label { display: block; font-size: 12px; font-weight: 700; color: var(--grey-700); margin-bottom: 6px; letter-spacing: .03em; text-transform: uppercase; }
+.form-input {
+  width: 100%;
+  background: var(--grey-50);
+  border: 1.5px solid var(--grey-200);
+  border-radius: var(--r-sm);
+  padding: 10px 14px;
+  font: 400 15px var(--font);
+  color: var(--text);
+  transition: all .2s;
+  outline: none;
+}
+.form-input:focus { border-color: var(--pfizer-blue); background: var(--white); box-shadow: 0 0 0 3px rgba(0,147,208,.1); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.btn-primary {
+  width: 100%; padding: 13px;
+  background: linear-gradient(135deg, var(--pfizer-blue), var(--pfizer-dark));
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font: 700 15px var(--font-h);
+  cursor: pointer;
+  transition: all .2s;
+  box-shadow: 0 4px 16px rgba(0,147,208,.35);
+  letter-spacing: .02em;
+  margin-top: 8px;
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,147,208,.45); }
+
+/* ─── SCREEN 1: PRELIMINARY ─── */
+#screen-prelim { padding: 28px; overflow-y: auto; gap: 24px; }
+.prelim-header { text-align: center; }
+.prelim-title { font-family: var(--font-h); font-size: 22px; font-weight: 800; color: var(--pfizer-dark); }
+.prelim-sub { font-size: 14px; color: var(--grey-500); margin-top: 4px; }
+.prelim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.prelim-card {
+  background: var(--white);
+  border: 1.5px solid var(--grey-200);
+  border-radius: var(--r);
+  padding: 20px;
+  box-shadow: var(--shadow-xs);
+}
+.prelim-card.full { grid-column: 1/-1; }
+.pc-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: var(--grey-400); margin-bottom: 12px; }
+.chip-group { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  padding: 7px 16px;
+  border-radius: 20px;
+  border: 1.5px solid var(--grey-300);
+  background: var(--grey-50);
+  font: 600 13px var(--font);
+  color: var(--grey-500);
+  cursor: pointer;
+  transition: all .18s;
+  user-select: none;
+}
+.chip:hover { border-color: var(--pfizer-blue); color: var(--pfizer-blue); background: var(--pfizer-light); }
+.chip.selected { background: var(--pfizer-blue); border-color: var(--pfizer-blue); color: white; box-shadow: 0 3px 10px rgba(0,147,208,.3); }
+.prelim-confirm-area { display: flex; justify-content: center; }
+.btn-confirm {
+  background: linear-gradient(135deg, var(--pfizer-blue), var(--pfizer-dark));
+  color: white; border: none;
+  border-radius: 10px;
+  padding: 12px 40px;
+  font: 700 15px var(--font-h);
+  cursor: pointer;
+  transition: all .2s;
+  box-shadow: 0 4px 14px rgba(0,147,208,.3);
+  display: flex; align-items: center; gap: 8px;
+}
+.btn-confirm:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,147,208,.45); }
+.btn-confirm:disabled { background: var(--grey-300); box-shadow: none; cursor: not-allowed; transform: none; }
+
+/* ─── SCREEN 2: BRIEF / CHAT ─── */
+#screen-brief { overflow: hidden; gap: 0; }
+.chat-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.chat-area::-webkit-scrollbar { width: 4px; }
+.chat-area::-webkit-scrollbar-thumb { background: var(--grey-300); border-radius: 99px; }
+
+.bot-row { display: flex; gap: 12px; animation: msgIn .28s ease; }
+@keyframes msgIn { from { opacity:0;transform:translateY(8px); } to { opacity:1;transform:translateY(0); } }
+.bot-av {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--pfizer-blue), var(--pfizer-dark));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; box-shadow: 0 2px 8px rgba(0,147,208,.3);
+}
+.bot-col { display: flex; flex-direction: column; gap: 4px; }
+.bot-name { font-size: 11px; font-weight: 800; color: var(--pfizer-blue); text-transform: uppercase; letter-spacing: .05em; }
+.bot-bubble {
+  background: var(--white);
+  border: 1px solid var(--grey-200);
+  border-radius: 4px 16px 16px 16px;
+  padding: 13px 17px;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--text);
+  box-shadow: var(--shadow-xs);
+  max-width: 560px;
+}
+.bot-bubble strong { color: var(--pfizer-dark); }
+.bot-bubble p { margin-bottom: 6px; }
+.bot-bubble p:last-child { margin-bottom: 0; }
+
+.user-row { display: flex; flex-direction: row-reverse; gap: 12px; animation: msgIn .28s ease; }
+.user-bubble {
+  background: linear-gradient(135deg, var(--pfizer-blue), var(--pfizer-dark));
+  color: white;
+  border-radius: 16px 4px 16px 16px;
+  padding: 12px 17px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  max-width: 500px;
+  box-shadow: 0 4px 14px rgba(0,147,208,.25);
+}
+.user-av {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  background: var(--grey-100);
+  border: 2px solid var(--grey-200);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+}
+
+.typing-row { display: flex; gap: 12px; }
+.typing-bub {
+  background: var(--white);
+  border: 1px solid var(--grey-200);
+  border-radius: 4px 16px 16px 16px;
+  padding: 14px 18px;
+  display: flex; gap: 5px; align-items: center;
+  box-shadow: var(--shadow-xs);
+}
+.td { width: 7px; height: 7px; border-radius: 50%; background: var(--grey-300); animation: tdb 1.4s infinite; }
+.td:nth-child(2) { animation-delay: .2s; }
+.td:nth-child(3) { animation-delay: .4s; }
+@keyframes tdb { 0%,60%,100%{transform:translateY(0);background:var(--grey-300)} 30%{transform:translateY(-6px);background:var(--pfizer-blue)} }
+
+.qr-row { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 0 0 48px; }
+.qr {
+  background: var(--white);
+  border: 1.5px solid var(--pfizer-blue);
+  color: var(--pfizer-blue);
+  border-radius: 20px; padding: 7px 16px;
+  font: 600 13px var(--font);
+  cursor: pointer; transition: all .18s;
+}
+.qr:hover { background: var(--pfizer-blue); color: white; box-shadow: 0 4px 12px rgba(0,147,208,.3); }
+
+.brief-card {
+  background: var(--pfizer-light);
+  border: 1.5px solid var(--pfizer-mid);
+  border-radius: var(--r);
+  padding: 18px 20px;
+  margin: 4px 0;
+  max-width: 560px;
+}
+.brief-card-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: var(--pfizer-blue); margin-bottom: 10px; }
+.brief-row { display: flex; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--pfizer-mid); font-size: 13px; }
+.brief-row:last-child { border-bottom: none; }
+.brief-key { font-weight: 700; color: var(--pfizer-dark); width: 110px; flex-shrink: 0; }
+.brief-val { color: var(--text-soft); }
+
+.chat-input-wrap {
+  padding: 14px 20px 16px;
+  border-top: 1px solid var(--grey-200);
+  background: var(--white);
+  flex-shrink: 0;
+}
+.chat-input-inner {
+  display: flex; align-items: flex-end; gap: 10px;
+  background: var(--grey-50);
+  border: 1.5px solid var(--grey-300);
+  border-radius: 14px;
+  padding: 10px 12px;
+  transition: all .2s;
+}
+.chat-input-inner:focus-within { border-color: var(--pfizer-blue); background: var(--white); box-shadow: 0 0 0 3px rgba(0,147,208,.1); }
+#briefInput {
+  flex: 1; background: none; border: none; outline: none;
+  font: 400 14px var(--font); color: var(--text);
+  resize: none; max-height: 100px; min-height: 22px; line-height: 1.5;
+}
+#briefInput::placeholder { color: var(--grey-400); }
+.chat-send {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--pfizer-blue); border: none; color: white;
+  font-size: 16px; cursor: pointer; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,147,208,.4);
+  transition: all .2s;
+}
+.chat-send:hover { background: var(--pfizer-dark); transform: scale(1.05); }
+.chat-send:disabled { background: var(--grey-300); box-shadow: none; transform: none; cursor: not-allowed; }
+
+/* ─── SCREEN 3: BUILDER ─── */
+#screen-builder { overflow: hidden; }
+.builder-inner {
+  flex: 1; display: flex; overflow: hidden;
+}
+.builder-canvas {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.builder-canvas::-webkit-scrollbar { width: 4px; }
+.builder-canvas::-webkit-scrollbar-thumb { background: var(--grey-300); border-radius: 99px; }
+
+.builder-topbar {
+  padding: 14px 20px;
+  background: var(--white);
+  border-bottom: 1px solid var(--grey-200);
+  display: flex; align-items: center; gap: 12px;
+  flex-shrink: 0;
+}
+.builder-title { font-family: var(--font-h); font-size: 14px; font-weight: 800; color: var(--pfizer-dark); flex: 1; }
+.checker-chips { display: flex; gap: 8px; }
+.checker-chip {
+  display: flex; align-items: center; gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px; font-weight: 700;
+  border: 1px solid;
+}
+.cc-grammar { color: var(--green); border-color: rgba(0,146,74,.3); background: var(--green-light); }
+.cc-compliance { color: var(--pfizer-blue); border-color: rgba(0,147,208,.3); background: var(--pfizer-light); }
+.cc-running { animation: ccPulse 1.5s ease-in-out infinite; }
+@keyframes ccPulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+
+.layout-picker-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--grey-400); }
+.layout-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.layout-opt {
+  background: var(--white);
+  border: 2px solid var(--grey-200);
+  border-radius: var(--r-sm);
+  padding: 14px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all .18s;
+}
+.layout-opt:hover { border-color: var(--pfizer-blue); box-shadow: var(--shadow-sm); }
+.layout-opt.chosen { border-color: var(--pfizer-blue); background: var(--pfizer-light); box-shadow: 0 0 0 3px rgba(0,147,208,.15); }
+.layout-preview { font-size: 28px; margin-bottom: 8px; }
+.layout-name { font-size: 12px; font-weight: 700; color: var(--grey-700); }
+.layout-desc { font-size: 11px; color: var(--grey-400); margin-top: 2px; }
+
+.page-block {
+  background: var(--white);
+  border: 1.5px solid var(--grey-200);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+}
+.page-block-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--grey-100);
+  display: flex; align-items: center; gap: 10px;
+  background: var(--grey-50);
+}
+.page-block-name { font-family: var(--font-h); font-size: 13px; font-weight: 800; color: var(--pfizer-dark); flex: 1; }
+.page-block-tools { display: flex; gap: 6px; }
+.pbt {
+  background: none; border: 1px solid var(--grey-200); border-radius: var(--r-xs);
+  padding: 3px 8px; font: 600 11px var(--font);
+  color: var(--grey-500); cursor: pointer; transition: all .18s;
+}
+.pbt:hover { border-color: var(--pfizer-blue); color: var(--pfizer-blue); }
+.editable-zone {
+  padding: 16px;
+  min-height: 80px;
+}
+.editable-block {
+  width: 100%; border: none; outline: none;
+  font: 400 14px var(--font); color: var(--text);
+  background: none; resize: none;
+  line-height: 1.6;
+  border-radius: var(--r-xs);
+  padding: 8px;
+  transition: background .2s;
+}
+.editable-block:focus { background: var(--grey-50); box-shadow: inset 0 0 0 1.5px var(--pfizer-mid); }
+.editable-block.heading { font: 700 22px var(--font-h); color: var(--pfizer-dark); }
+.editable-block.subheading { font: 600 16px var(--font); color: var(--grey-700); }
+
+.add-page-btn {
+  background: var(--grey-50);
+  border: 2px dashed var(--grey-300);
+  border-radius: var(--r);
+  padding: 18px;
+  text-align: center;
+  cursor: pointer;
+  color: var(--grey-400);
+  font: 600 13px var(--font);
+  transition: all .2s;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.add-page-btn:hover { border-color: var(--pfizer-blue); color: var(--pfizer-blue); background: var(--pfizer-light); }
+
+.builder-actions {
+  padding: 14px 20px;
+  border-top: 1px solid var(--grey-200);
+  background: var(--white);
+  display: flex; align-items: center; gap: 10px;
+  flex-shrink: 0;
+}
+.btn-sec {
+  background: none; border: 1.5px solid var(--grey-300);
+  border-radius: 8px; padding: 9px 18px;
+  font: 600 13px var(--font); color: var(--grey-600);
+  cursor: pointer; transition: all .2s;
+}
+.btn-sec:hover { border-color: var(--pfizer-blue); color: var(--pfizer-blue); }
+.btn-prim {
+  background: linear-gradient(135deg, var(--pfizer-blue), var(--pfizer-dark));
+  color: white; border: none;
+  border-radius: 8px; padding: 9px 22px;
+  font: 700 13px var(--font);
+  cursor: pointer; transition: all .2s;
+  box-shadow: 0 3px 12px rgba(0,147,208,.35);
+}
+.btn-prim:hover { transform: translateY(-1px); box-shadow: 0 5px 16px rgba(0,147,208,.45); }
+.ml-auto { margin-left: auto; }
+
+/* ─── SCREEN 4: REVIEW ─── */
+#screen-review { overflow-y: auto; padding: 28px; gap: 24px; }
+.review-header { text-align: center; }
+.review-title { font-family: var(--font-h); font-size: 22px; font-weight: 800; color: var(--pfizer-dark); }
+.review-sub { font-size: 14px; color: var(--grey-500); margin-top: 4px; }
+.review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.review-card {
+  background: var(--white);
+  border: 1.5px solid var(--grey-200);
+  border-radius: var(--r);
+  padding: 18px;
+  box-shadow: var(--shadow-xs);
+}
+.review-card.full { grid-column: 1/-1; }
+.rc-title { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: var(--grey-400); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+.check-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--grey-100); font-size: 13.5px; }
+.check-item:last-child { border-bottom: none; }
+.ci-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+.ci-text { flex: 1; color: var(--text-soft); line-height: 1.4; }
+.ci-text strong { color: var(--text); }
+
+.score-ring-wrap { display: flex; align-items: center; gap: 20px; }
+.score-ring { position: relative; width: 80px; height: 80px; flex-shrink: 0; }
+.score-ring svg { transform: rotate(-90deg); }
+.score-ring-val { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-h); font-size: 18px; font-weight: 900; color: var(--pfizer-dark); }
+.score-details { flex: 1; }
+.score-label { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.score-bar-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--grey-500); margin-bottom: 4px; }
+.score-mini { flex: 1; height: 5px; background: var(--grey-200); border-radius: 99px; overflow: hidden; }
+.score-mini-fill { height: 100%; border-radius: 99px; transition: width .8s ease; }
+
+/* ─── SCREEN 5: SUBMIT ─── */
+#screen-submit { overflow-y: auto; padding: 28px; gap: 24px; align-items: center; }
+.submit-card {
+  background: var(--white);
+  border: 1.5px solid var(--grey-200);
+  border-radius: 20px;
+  padding: 40px 44px;
+  max-width: 560px;
+  width: 100%;
+  box-shadow: var(--shadow-md);
+}
+.submit-icon { text-align: center; font-size: 48px; margin-bottom: 16px; }
+.submit-title { font-family: var(--font-h); font-size: 22px; font-weight: 900; color: var(--pfizer-dark); text-align: center; margin-bottom: 6px; }
+.submit-sub { text-align: center; font-size: 14px; color: var(--grey-500); margin-bottom: 28px; }
+.tc-box {
+  background: var(--grey-50);
+  border: 1px solid var(--grey-200);
+  border-radius: var(--r-sm);
+  padding: 14px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--grey-600);
+  max-height: 140px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+}
+.tc-check { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; cursor: pointer; }
+.tc-check input { width: 18px; height: 18px; accent-color: var(--pfizer-blue); cursor: pointer; }
+.tc-check label { font-size: 14px; font-weight: 600; color: var(--text); cursor: pointer; }
+.submit-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+.sm-field { background: var(--grey-50); border: 1px solid var(--grey-200); border-radius: var(--r-sm); padding: 10px 12px; }
+.sm-field label { display: block; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--grey-400); margin-bottom: 4px; }
+.sm-field span { font-size: 13px; font-weight: 600; color: var(--text); }
+
+/* ─── RIGHT NOTEPAD ─── */
+.right-col {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--white);
+  border-left: 1px solid var(--grey-200);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.notepad-header {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--grey-100);
+  display: flex; align-items: center; gap: 8px;
+}
+.notepad-title { font-family: var(--font-h); font-size: 13px; font-weight: 800; color: var(--grey-700); flex: 1; }
+.notepad-actions { display: flex; gap: 4px; }
+.np-btn {
+  background: none; border: 1px solid var(--grey-200);
+  border-radius: 5px; padding: 4px 7px;
+  font-size: 11px; font-weight: 700; color: var(--grey-400);
+  cursor: pointer; transition: all .18s;
+}
+.np-btn:hover { border-color: var(--pfizer-blue); color: var(--pfizer-blue); }
+#notepad {
+  flex: 1; border: none; outline: none; resize: none;
+  padding: 14px;
+  font: 400 13px var(--font);
+  color: var(--text);
+  line-height: 1.7;
+  background: var(--grey-50);
+}
+.notepad-footer {
+  padding: 8px 14px;
+  border-top: 1px solid var(--grey-100);
+  font-size: 11px; color: var(--grey-400);
+}
+
+/* ─── TOASTS ─── */
+.toast {
+  position: fixed; bottom: 24px; right: 24px;
+  background: var(--grey-900);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 13px; font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  z-index: 999;
+  display: flex; align-items: center; gap: 8px;
+  animation: toastIn .3s ease;
+  max-width: 300px;
+}
+.toast.green { background: var(--green); }
+.toast.blue { background: var(--pfizer-dark); }
+@keyframes toastIn { from{transform:translateY(10px);opacity:0} to{transform:translateY(0);opacity:1} }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="tb-logo">Pfizer</div>
+  <div class="tb-sep"></div>
+  <div class="tb-title">Design Thinking Accelerator</div>
+  <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+    <button class="tb-save-btn" onclick="saveSession()">💾 Save Session</button>
+    <div class="tb-user-chip" id="tbUserChip" style="display:none">
+      <div class="tb-avatar" id="tbAvatar">U</div>
+      <span id="tbName">User</span>
+    </div>
+  </div>
+</header>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar-outer" id="progressBar">
+  <div class="prog-step active" id="pstep-0">
+    <div class="prog-dot"><div class="pnum">1</div>&nbsp;Registration</div>
+  </div>
+  <div class="prog-arrow">›</div>
+  <div class="prog-step" id="pstep-1">
+    <div class="prog-dot"><div class="pnum">2</div>&nbsp;Preliminary</div>
+  </div>
+  <div class="prog-arrow">›</div>
+  <div class="prog-step" id="pstep-2">
+    <div class="prog-dot"><div class="pnum">3</div>&nbsp;Brief</div>
+  </div>
+  <div class="prog-arrow">›</div>
+  <div class="prog-step" id="pstep-3">
+    <div class="prog-dot"><div class="pnum">4</div>&nbsp;Builder</div>
+  </div>
+  <div class="prog-arrow">›</div>
+  <div class="prog-step" id="pstep-4">
+    <div class="prog-dot"><div class="pnum">5</div>&nbsp;Review</div>
+  </div>
+  <div class="prog-arrow">›</div>
+  <div class="prog-step" id="pstep-5">
+    <div class="prog-dot"><div class="pnum">6</div>&nbsp;Submit</div>
+  </div>
+  <div class="prog-pct" id="progPct">0% · <span class="prog-next">Next: Preliminary Questions</span></div>
+</div>
+
+<!-- WORKSPACE -->
+<div class="workspace">
+
+  <!-- LEFT NAV -->
+  <aside class="left-col" id="leftCol">
+    <div class="left-section">
+      <div class="left-section-title">Sections</div>
+      <div class="left-nav-item active" onclick="goToStep(0)" id="lnav-0"><span class="lni">👤</span>Registration<span class="lni-status s-active" id="ls-0">●</span></div>
+      <div class="left-nav-item" onclick="goToStep(1)" id="lnav-1"><span class="lni">🎯</span>Preliminary<span class="lni-status s-lock" id="ls-1">🔒</span></div>
+      <div class="left-nav-item" onclick="goToStep(2)" id="lnav-2"><span class="lni">💬</span>Brief<span class="lni-status s-lock" id="ls-2">🔒</span></div>
+      <div class="left-nav-item" onclick="goToStep(3)" id="lnav-3"><span class="lni">🏗️</span>Builder<span class="lni-status s-lock" id="ls-3">🔒</span></div>
+      <div class="left-nav-item" onclick="goToStep(4)" id="lnav-4"><span class="lni">🔍</span>Review<span class="lni-status s-lock" id="ls-4">🔒</span></div>
+      <div class="left-nav-item" onclick="goToStep(5)" id="lnav-5"><span class="lni">📤</span>Submit<span class="lni-status s-lock" id="ls-5">🔒</span></div>
+    </div>
+    <div class="brief-history">
+      <div class="brief-history-title">📋 Brief History</div>
+      <div id="briefHistoryList"><div style="font-size:12px;color:var(--grey-400)">No briefs yet</div></div>
+    </div>
+  </aside>
+
+  <!-- CENTER -->
+  <main class="center-col">
+
+    <!-- SCREEN 0: REGISTRATION -->
+    <div class="panel active" id="screen-reg">
+      <div class="reg-card">
+        <div class="reg-header">
+          <div class="reg-icon">✦</div>
+          <div class="reg-title">Welcome to the Accelerator</div>
+          <div class="reg-sub">Please enter your details to personalise your workspace and save your progress.</div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">First Name</label><input class="form-input" id="rFirstName" placeholder="Jane" /></div>
+          <div class="form-group"><label class="form-label">Last Name</label><input class="form-input" id="rLastName" placeholder="Smith" /></div>
+        </div>
+        <div class="form-group"><label class="form-label">Contact Number</label><input class="form-input" id="rPhone" placeholder="+44 7700 000000" /></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Employee Number</label><input class="form-input" id="rEmpNum" placeholder="PFZ-00000" /></div>
+          <div class="form-group"><label class="form-label">Department</label><input class="form-input" id="rDept" placeholder="Digital Marketing" /></div>
+        </div>
+        <button class="btn-primary" onclick="submitReg()">Continue to Workspace →</button>
+        <div style="text-align:center;margin-top:12px">
+          <button style="background:none;border:none;font:600 12px var(--font);color:var(--pfizer-blue);cursor:pointer" onclick="loadSession()">↩ Load saved session</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 1: PRELIMINARY -->
+    <div class="panel" id="screen-prelim">
+      <div class="prelim-header">
+        <div class="prelim-title" id="prelimGreet">Let's customise your build, [Name]</div>
+        <div class="prelim-sub">Select your options below — these will personalise every step that follows.</div>
+      </div>
+      <div class="prelim-grid">
+        <div class="prelim-card">
+          <div class="pc-label">🏗️ What are you building?</div>
+          <div class="chip-group" id="chips-build">
+            <div class="chip" onclick="selectChip(this,'build')">Website</div>
+            <div class="chip" onclick="selectChip(this,'build')">Webpage</div>
+          </div>
+        </div>
+        <div class="prelim-card">
+          <div class="pc-label">👥 Target Audience</div>
+          <div class="chip-group" id="chips-audience">
+            <div class="chip" onclick="selectChip(this,'audience')">Patients</div>
+            <div class="chip" onclick="selectChip(this,'audience')">Healthcare Providers</div>
+            <div class="chip" onclick="selectChip(this,'audience')">Channel Partners</div>
+            <div class="chip" onclick="selectChip(this,'audience')">Internal Teams</div>
+          </div>
+        </div>
+        <div class="prelim-card">
+          <div class="pc-label">🌍 Region / Country</div>
+          <div class="chip-group" id="chips-region">
+            <div class="chip" onclick="selectChip(this,'region')">🇬🇧 UK</div>
+            <div class="chip" onclick="selectChip(this,'region')">🇺🇸 USA</div>
+            <div class="chip" onclick="selectChip(this,'region')">🇪🇺 EU</div>
+            <div class="chip" onclick="selectChip(this,'region')">🌏 APAC</div>
+            <div class="chip" onclick="selectChip(this,'region')">🌍 Global</div>
+          </div>
+        </div>
+        <div class="prelim-card">
+          <div class="pc-label">🗣️ Language</div>
+          <div class="chip-group" id="chips-language">
+            <div class="chip" onclick="selectChip(this,'language')">English</div>
+            <div class="chip" onclick="selectChip(this,'language')">French</div>
+            <div class="chip" onclick="selectChip(this,'language')">German</div>
+            <div class="chip" onclick="selectChip(this,'language')">Spanish</div>
+            <div class="chip" onclick="selectChip(this,'language')">Mandarin</div>
+          </div>
+        </div>
+        <div class="prelim-card full">
+          <div class="pc-label">🤖 AI Translation Required?</div>
+          <div class="chip-group" id="chips-translation">
+            <div class="chip" onclick="selectChip(this,'translation')">Yes — auto-translate all content</div>
+            <div class="chip" onclick="selectChip(this,'translation')">No — English only</div>
+            <div class="chip" onclick="selectChip(this,'translation')">Partial — key pages only</div>
+          </div>
+        </div>
+      </div>
+      <div class="prelim-confirm-area">
+        <button class="btn-confirm" id="confirmPrelimBtn" onclick="confirmPrelim()" disabled>
+          Confirm &amp; Build Brief →
+        </button>
+      </div>
+    </div>
+
+    <!-- SCREEN 2: BRIEF CHAT -->
+    <div class="panel" id="screen-brief">
+      <div class="chat-area" id="chatArea"></div>
+      <div class="chat-input-wrap">
+        <div class="chat-input-inner">
+          <textarea id="briefInput" rows="1" placeholder="Describe what you'd like to build…" onkeydown="handleBriefKey(event)" oninput="autoR(this)"></textarea>
+          <button class="chat-send" id="briefSendBtn" onclick="sendBriefMsg()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 3: BUILDER -->
+    <div class="panel" id="screen-builder">
+      <div class="builder-topbar">
+        <div class="builder-title" id="builderTitle">Page Builder</div>
+        <div class="checker-chips">
+          <div class="checker-chip cc-grammar cc-running" id="grammarChip">✍️ Grammar · Checking…</div>
+          <div class="checker-chip cc-compliance cc-running" id="complianceChip">🛡️ Compliance · Checking…</div>
+        </div>
+      </div>
+      <div class="builder-inner">
+        <div class="builder-canvas" id="builderCanvas">
+          <div class="layout-picker-label">Choose a layout for your page:</div>
+          <div class="layout-grid">
+            <div class="layout-opt" onclick="pickLayout(this,'hero')"><div class="layout-preview">🖼️</div><div class="layout-name">Hero</div><div class="layout-desc">Bold headline + CTA</div></div>
+            <div class="layout-opt" onclick="pickLayout(this,'columns')"><div class="layout-preview">⬜⬜</div><div class="layout-name">2-Column</div><div class="layout-desc">Content + sidebar</div></div>
+            <div class="layout-opt" onclick="pickLayout(this,'cards')"><div class="layout-preview">🃏</div><div class="layout-name">Card Grid</div><div class="layout-desc">Feature cards</div></div>
+            <div class="layout-opt" onclick="pickLayout(this,'article')"><div class="layout-preview">📄</div><div class="layout-name">Article</div><div class="layout-desc">Long-form content</div></div>
+          </div>
+          <div id="pageBlocks"></div>
+          <div class="add-page-btn" onclick="addPage()">＋ Add another page</div>
+        </div>
+      </div>
+      <div class="builder-actions">
+        <button class="btn-sec" onclick="previewBuild()">👁 Preview</button>
+        <button class="btn-sec" onclick="resetLayout()">↺ Change Layout</button>
+        <button class="btn-prim ml-auto" onclick="goToStep(4)">Proceed to Review →</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 4: REVIEW -->
+    <div class="panel" id="screen-review">
+      <div class="review-header">
+        <div class="review-title">🔍 Final AI Review</div>
+        <div class="review-sub">Our pipeline has checked your content. Review findings before submitting.</div>
+      </div>
+      <div class="review-grid">
+        <div class="review-card">
+          <div class="rc-title">🛡️ Compliance</div>
+          <div class="check-item"><span class="ci-icon">✅</span><span class="ci-text"><strong>WCAG 2.1 AA</strong> — Colour contrast ratios meet guidelines</span></div>
+          <div class="check-item"><span class="ci-icon">✅</span><span class="ci-text"><strong>GDPR</strong> — Cookie consent block included</span></div>
+          <div class="check-item"><span class="ci-icon">⚠️</span><span class="ci-text"><strong>Brand Voice</strong> — 2 phrases flagged for Pfizer tone review</span></div>
+          <div class="check-item"><span class="ci-icon">✅</span><span class="ci-text"><strong>Regulatory</strong> — No restricted medical claims detected</span></div>
+        </div>
+        <div class="review-card">
+          <div class="rc-title">✍️ Grammar &amp; Brand</div>
+          <div class="check-item"><span class="ci-icon">✅</span><span class="ci-text"><strong>Grammar</strong> — No errors found</span></div>
+          <div class="check-item"><span class="ci-icon">✅</span><span class="ci-text"><strong>Spelling</strong> — All clear</span></div>
+          <div class="check-item"><span class="ci-icon">⚠️</span><span class="ci-text"><strong>Readability</strong> — Grade 12; consider simplifying for patients</span></div>
+          <div class="check-item"><span class="ci-icon">✅</span><span class="ci-text"><strong>Inclusive Language</strong> — Passes all checks</span></div>
+        </div>
+        <div class="review-card full">
+          <div class="rc-title">📊 Overall Readiness Score</div>
+          <div class="score-ring-wrap">
+            <div class="score-ring">
+              <svg width="80" height="80" viewBox="0 0 80 80">
+                <circle cx="40" cy="40" r="32" fill="none" stroke="var(--grey-200)" stroke-width="8"/>
+                <circle cx="40" cy="40" r="32" fill="none" stroke="var(--pfizer-blue)" stroke-width="8"
+                  stroke-dasharray="201" stroke-dashoffset="40" stroke-linecap="round"/>
+              </svg>
+              <div class="score-ring-val">80%</div>
+            </div>
+            <div class="score-details">
+              <div class="score-label">Ready for review with minor notes</div>
+              <div class="score-bar-row">Compliance<div class="score-mini"><div class="score-mini-fill" style="width:90%;background:var(--green)"></div></div>90%</div>
+              <div class="score-bar-row">Grammar<div class="score-mini"><div class="score-mini-fill" style="width:95%;background:var(--pfizer-blue)"></div></div>95%</div>
+              <div class="score-bar-row">Brand Voice<div class="score-mini"><div class="score-mini-fill" style="width:75%;background:var(--orange)"></div></div>75%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:center;gap:12px;padding:8px 0 4px">
+        <button class="btn-sec" onclick="goToStep(3)">← Edit Content</button>
+        <button class="btn-prim" onclick="goToStep(5)">Confirm &amp; Submit →</button>
+      </div>
+    </div>
+
+    <!-- SCREEN 5: SUBMIT -->
+    <div class="panel" id="screen-submit">
+      <div class="submit-card">
+        <div class="submit-icon">📤</div>
+        <div class="submit-title">Send to Review Team</div>
+        <div class="submit-sub">Your project will be submitted to the IT review team for final approval before publishing.</div>
+        <div class="submit-meta" id="submitMeta"></div>
+        <div class="tc-box">
+          <strong>Terms &amp; Conditions</strong><br><br>
+          By submitting this project, I confirm that: (1) All content complies with Pfizer's Digital Standards and Brand Guidelines; (2) No unpublished clinical data or restricted information is included; (3) I have reviewed and approved all AI-generated content; (4) The content meets WCAG 2.1 AA accessibility standards; (5) Appropriate legal and regulatory review has been completed or is requested via this submission. I understand that the IT Review Team may request amendments before approval.
+        </div>
+        <div class="tc-check">
+          <input type="checkbox" id="tcCheck" onchange="toggleSubmit()" />
+          <label for="tcCheck">I agree to the Terms &amp; Conditions above</label>
+        </div>
+        <button class="btn-primary" id="finalSubmitBtn" disabled onclick="finalSubmit()">Submit for Review ✓</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- RIGHT NOTEPAD -->
+  <aside class="right-col" id="rightCol">
+    <div class="notepad-header">
+      <div class="notepad-title">📝 Notepad</div>
+      <div class="notepad-actions">
+        <button class="np-btn" onclick="copyNote()">Copy</button>
+        <button class="np-btn" onclick="clearNote()">Clear</button>
+      </div>
+    </div>
+    <textarea id="notepad" placeholder="Jot down ideas, notes, copy snippets…&#10;&#10;Everything here auto-saves."></textarea>
+    <div class="notepad-footer" id="notepadFooter">0 characters</div>
+  </aside>
+
+</div>
+
+<script>
+// ═══ STATE ═══
+const S = {
+  step: 0,
+  maxUnlocked: 0,
+  user: {},
+  prelim: { build: null, audience: null, region: null, language: null, translation: null },
+  briefHistory: [],
+  briefMessages: [],
+  briefConfirmed: false,
+  briefData: null,
+  chosenLayout: null,
+  pageCount: 1,
+  loading: false
+};
+
+const STEPS = ['screen-reg','screen-prelim','screen-brief','screen-builder','screen-review','screen-submit'];
+const PCT = [0, 17, 34, 55, 78, 100];
+const NEXT = ['Preliminary Questions','Brief Builder','Builder','Review','Submit','Done!'];
+
+// ═══ REGISTRATION ═══
+function submitReg() {
+  const fn = v('rFirstName').trim(), ln = v('rLastName').trim();
+  const phone = v('rPhone').trim(), emp = v('rEmpNum').trim(), dept = v('rDept').trim();
+  if (!fn || !ln || !emp || !dept) { toast('Please fill in all required fields', 'orange'); return; }
+  S.user = { firstName: fn, lastName: ln, phone, emp, dept };
+  document.getElementById('tbUserChip').style.display = 'flex';
+  document.getElementById('tbAvatar').textContent = fn[0].toUpperCase() + ln[0].toUpperCase();
+  document.getElementById('tbName').textContent = fn;
+  document.getElementById('prelimGreet').textContent = `Let's customise your build, ${fn} 👋`;
+  goToStep(1);
+}
+
+// ═══ PRELIMINARY ═══
+function selectChip(el, group) {
+  document.querySelectorAll(`#chips-${group} .chip`).forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  S.prelim[group] = el.textContent.trim();
+  checkPrelimReady();
+}
+
+function checkPrelimReady() {
+  const ready = Object.values(S.prelim).every(v => v !== null);
+  document.getElementById('confirmPrelimBtn').disabled = !ready;
+}
+
+function confirmPrelim() {
+  goToStep(2);
+  initBriefChat();
+}
+
+// ═══ BRIEF CHAT ═══
+function initBriefChat() {
+  const chatArea = document.getElementById('chatArea');
+  chatArea.innerHTML = '';
+  S.briefMessages = [];
+  S.briefConfirmed = false;
+
+  const greeting = `Hi ${S.user.firstName}! 👋 I've noted your setup:
+<strong>${S.prelim.build}</strong> for <strong>${S.prelim.audience}</strong> · <strong>${S.prelim.region}</strong> · ${S.prelim.language}${S.prelim.translation !== 'No — English only' ? ' (with translation)' : ''}.
+
+Now tell me — <strong>what is the purpose and goal of this ${S.prelim.build}?</strong> What should a visitor do or feel when they arrive?`;
+
+  addBotBubble(greeting);
+}
+
+function addBotBubble(html, qrs = []) {
+  const area = document.getElementById('chatArea');
+  const row = document.createElement('div');
+  row.className = 'bot-row';
+  row.innerHTML = `<div class="bot-av">✦</div><div class="bot-col"><div class="bot-name">Pfizer Accelerator</div><div class="bot-bubble">${html}</div></div>`;
+  area.appendChild(row);
+  if (qrs.length) {
+    const qrow = document.createElement('div');
+    qrow.className = 'qr-row';
+    qrow.innerHTML = qrs.map(q => `<button class="qr" onclick="useQR('${esc(q)}',this)">${q}</button>`).join('');
+    area.appendChild(qrow);
+  }
+  area.scrollTop = area.scrollHeight;
+}
+
+function addUserBubble(text) {
+  const area = document.getElementById('chatArea');
+  const row = document.createElement('div');
+  row.className = 'user-row';
+  row.innerHTML = `<div class="user-av">👤</div><div class="user-bubble">${escHtml(text)}</div>`;
+  area.appendChild(row);
+  area.scrollTop = area.scrollHeight;
+}
+
+function addTypingIndicator() {
+  const area = document.getElementById('chatArea');
+  const row = document.createElement('div');
+  row.className = 'typing-row';
+  row.id = 'typingInd';
+  row.innerHTML = `<div class="bot-av">✦</div><div class="typing-bub"><div class="td"></div><div class="td"></div><div class="td"></div></div>`;
+  area.appendChild(row);
+  area.scrollTop = area.scrollHeight;
+}
+
+function removeTyping() { document.getElementById('typingInd')?.remove(); }
+
+function useQR(text, btn) {
+  btn.closest('.qr-row')?.querySelectorAll('.qr').forEach(b => b.disabled = true);
+  addUserBubble(text);
+  S.briefMessages.push({ role: 'user', content: text });
+  callBriefAgent(text);
+}
+
+function handleBriefKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendBriefMsg(); }
+}
+function autoR(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 100) + 'px'; }
+
+async function sendBriefMsg() {
+  if (S.loading) return;
+  const input = document.getElementById('briefInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = ''; input.style.height = 'auto';
+  addUserBubble(text);
+  S.briefMessages.push({ role: 'user', content: text });
+  callBriefAgent(text);
+}
+
+async function callBriefAgent(userText) {
+  S.loading = true;
+  document.getElementById('briefSendBtn').disabled = true;
+  document.getElementById('briefInput').disabled = true;
+  addTypingIndicator();
+
+  const systemPrompt = `You are a warm, expert web design consultant at Pfizer. You are helping ${S.user.firstName} ${S.user.lastName} (Dept: ${S.user.dept}) build a ${S.prelim.build} for ${S.prelim.audience} in ${S.prelim.region}, in ${S.prelim.language}${S.prelim.translation !== 'No — English only' ? ' with AI translation' : ''}.
+
+Your job: Through conversation (2–4 exchanges), gather enough detail to produce a complete design brief. Ask about: purpose/goal, key content sections, tone/style, specific features, any existing brand assets.
+
+Once you have enough detail (after 2+ user messages), produce the brief in this exact format at the end of your message:
+
+##BRIEF_START##
+Goal: [goal]
+Audience: ${S.prelim.audience}
+Region: ${S.prelim.region}
+Language: ${S.prelim.language}
+Build Type: ${S.prelim.build}
+Key Sections: [list]
+Tone: [tone]
+Features: [features]
+Special Requirements: [any notes]
+##BRIEF_END##
+
+Then ask: "Does this brief capture what you're looking for? You can refine it or confirm to proceed to the builder."
+
+Before the brief is ready, just ask one focused follow-up question. Keep all messages under 80 words. Warm, professional tone.`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: S.briefMessages.map(m => ({ role: m.role === 'agent' ? 'assistant' : m.role, content: m.content }))
+      })
+    });
+    const data = await res.json();
+    const reply = data.content?.map(b => b.text || '').join('') || 'Something went wrong.';
+    S.briefMessages.push({ role: 'agent', content: reply });
+    removeTyping();
+
+    if (reply.includes('##BRIEF_START##')) {
+      const briefText = reply.match(/##BRIEF_START##([\s\S]*?)##BRIEF_END##/)?.[1]?.trim() || '';
+      S.briefData = briefText;
+
+      // Save to history
+      const ts = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      S.briefHistory.push({ time: ts, text: briefText });
+      updateBriefHistory();
+
+      const cleanReply = reply.replace(/##BRIEF_START##[\s\S]*?##BRIEF_END##/, '').trim();
+      // Show brief card
+      const area = document.getElementById('chatArea');
+      const botRow = document.createElement('div');
+      botRow.className = 'bot-row';
+      const briefLines = briefText.split('\n').filter(l => l.trim()).map(l => {
+        const [k, ...v] = l.split(':');
+        return `<div class="brief-row"><span class="brief-key">${k}</span><span class="brief-val">${v.join(':').trim()}</span></div>`;
+      }).join('');
+      botRow.innerHTML = `<div class="bot-av">✦</div><div class="bot-col"><div class="bot-name">Pfizer Accelerator</div>
+        <div class="bot-bubble">
+          ${formatBotText(cleanReply)}
+          <div class="brief-card"><div class="brief-card-title">📋 Your Brief</div>${briefLines}</div>
+        </div></div>`;
+      area.appendChild(botRow);
+
+      // Quick replies
+      const qrow = document.createElement('div');
+      qrow.className = 'qr-row';
+      qrow.innerHTML = `
+        <button class="qr" style="background:var(--pfizer-blue);color:white;border-color:var(--pfizer-blue)" onclick="confirmBrief()">✓ Confirm — take me to the Builder</button>
+        <button class="qr" onclick="useQR('I\\'d like to refine the brief',this)">✏️ Refine the brief</button>`;
+      area.appendChild(qrow);
+      area.scrollTop = area.scrollHeight;
+    } else {
+      addBotBubble(formatBotText(reply));
+    }
+  } catch (err) {
+    removeTyping();
+    addBotBubble(`⚠️ ${err.message}`);
+  }
+  S.loading = false;
+  document.getElementById('briefSendBtn').disabled = false;
+  document.getElementById('briefInput').disabled = false;
+}
+
+function confirmBrief() {
+  S.briefConfirmed = true;
+  addBotBubble(`Great! Your brief is confirmed and saved. 🎉<br>Taking you to the <strong>Builder</strong> now — I'll pre-populate your content based on the brief.`);
+  setTimeout(() => {
+    goToStep(3);
+    populateBuilder();
+  }, 1200);
+}
+
+function updateBriefHistory() {
+  const list = document.getElementById('briefHistoryList');
+  list.innerHTML = S.briefHistory.map((b, i) => `
+    <div class="brief-item">
+      <div class="bi-time">Version ${i + 1} · ${b.time}</div>
+      ${b.text.split('\n')[0]}…
+    </div>`).join('');
+}
+
+// ═══ BUILDER ═══
+async function populateBuilder() {
+  const canvas = document.getElementById('builderCanvas');
+  // Animate checker chips
+  setTimeout(() => {
+    document.getElementById('grammarChip').textContent = '✍️ Grammar · All clear';
+    document.getElementById('grammarChip').classList.remove('cc-running');
+    document.getElementById('complianceChip').textContent = '🛡️ Compliance · 2 notes';
+    document.getElementById('complianceChip').classList.remove('cc-running');
+  }, 3000);
+
+  if (S.chosenLayout) buildPageBlocks();
+}
+
+function pickLayout(el, type) {
+  document.querySelectorAll('.layout-opt').forEach(o => o.classList.remove('chosen'));
+  el.classList.add('chosen');
+  S.chosenLayout = type;
+  buildPageBlocks();
+}
+
+function buildPageBlocks() {
+  const blocks = document.getElementById('pageBlocks');
+  const briefGoal = S.briefData?.match(/Goal: (.+)/)?.[1] || 'Build a brand-compliant digital experience';
+  const audience = S.prelim.audience || 'our audience';
+
+  const layouts = {
+    hero: [
+      { name: 'Hero Section', fields: [
+        { type: 'heading', label: 'Headline', val: `Advancing Health for ${audience}` },
+        { type: 'subheading', label: 'Subheadline', val: briefGoal },
+        { type: 'normal', label: 'Body Copy', val: 'At Pfizer, we are committed to delivering breakthrough medicines and vaccines that improve lives. Explore how we\'re making a difference.' }
+      ]},
+      { name: 'Call to Action', fields: [
+        { type: 'normal', label: 'CTA Text', val: 'Learn more about our commitment to your health.' }
+      ]}
+    ],
+    columns: [
+      { name: 'Main Content', fields: [
+        { type: 'heading', label: 'Section Title', val: `Welcome${S.user.firstName ? ', ' + S.user.firstName : ''}` },
+        { type: 'normal', label: 'Left Column', val: 'Our science-led approach drives every decision we make, putting patient needs at the centre of our work.' }
+      ]},
+      { name: 'Sidebar', fields: [
+        { type: 'normal', label: 'Key Highlights', val: '• WCAG 2.1 AA compliant\n• Available in ' + (S.prelim.language || 'English') + '\n• Region: ' + (S.prelim.region || 'Global') }
+      ]}
+    ],
+    cards: [
+      { name: 'Feature Cards', fields: [
+        { type: 'heading', label: 'Section Title', val: 'Key Features' },
+        { type: 'normal', label: 'Card 1', val: '🔬 Innovation — Pioneering research at every stage.' },
+        { type: 'normal', label: 'Card 2', val: '🌍 Access — Reaching patients across ' + (S.prelim.region || 'all regions') + '.' },
+        { type: 'normal', label: 'Card 3', val: '🤝 Partnership — Working with healthcare providers.' }
+      ]}
+    ],
+    article: [
+      { name: 'Article Body', fields: [
+        { type: 'heading', label: 'Title', val: briefGoal },
+        { type: 'normal', label: 'Introduction', val: `This ${S.prelim.build || 'page'} has been designed for ${audience} in ${S.prelim.region || 'your region'}.` },
+        { type: 'normal', label: 'Main Content', val: 'Insert your primary content here. All copy is editable, grammar-checked, and compliance-reviewed in real time.' }
+      ]}
+    ]
+  };
+
+  const sections = layouts[S.chosenLayout] || layouts.hero;
+  blocks.innerHTML = sections.map((sec, si) => `
+    <div class="page-block" id="pb-${si}">
+      <div class="page-block-header">
+        <div class="page-block-name">Page 1 · ${sec.name}</div>
+        <div class="page-block-tools">
+          <button class="pbt">↑ Move</button>
+          <button class="pbt">✎ Edit</button>
+          <button class="pbt" onclick="this.closest('.page-block').remove()">✕</button>
+        </div>
+      </div>
+      <div class="editable-zone">
+        ${sec.fields.map(f => `
+          <div style="margin-bottom:10px">
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--grey-400);margin-bottom:4px">${f.label}</div>
+            <textarea class="editable-block ${f.type}" rows="${f.type === 'heading' ? 1 : f.type === 'subheading' ? 2 : 3}" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'">${f.val}</textarea>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function addPage() {
+  S.pageCount++;
+  const blocks = document.getElementById('pageBlocks');
+  const div = document.createElement('div');
+  div.className = 'page-block';
+  div.innerHTML = `
+    <div class="page-block-header">
+      <div class="page-block-name">Page ${S.pageCount} · New Page</div>
+      <div class="page-block-tools">
+        <button class="pbt">↑ Move</button>
+        <button class="pbt">✎ Edit</button>
+        <button class="pbt" onclick="this.closest('.page-block').remove()">✕</button>
+      </div>
+    </div>
+    <div class="editable-zone">
+      <textarea class="editable-block heading" rows="1" placeholder="Page title…"></textarea>
+      <textarea class="editable-block normal" rows="4" placeholder="Start typing your content here…" style="margin-top:10px"></textarea>
+    </div>`;
+  blocks.appendChild(div);
+  div.scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetLayout() {
+  S.chosenLayout = null;
+  document.querySelectorAll('.layout-opt').forEach(o => o.classList.remove('chosen'));
+  document.getElementById('pageBlocks').innerHTML = '';
+}
+
+function previewBuild() {
+  toast('Preview mode — opening draft view…', 'blue');
+}
+
+// ═══ SUBMIT ═══
+function populateSubmitMeta() {
+  document.getElementById('submitMeta').innerHTML = `
+    <div class="sm-field"><label>Name</label><span>${S.user.firstName} ${S.user.lastName}</span></div>
+    <div class="sm-field"><label>Employee #</label><span>${S.user.emp}</span></div>
+    <div class="sm-field"><label>Department</label><span>${S.user.dept}</span></div>
+    <div class="sm-field"><label>Build Type</label><span>${S.prelim.build || '—'}</span></div>
+  `;
+}
+
+function toggleSubmit() {
+  document.getElementById('finalSubmitBtn').disabled = !document.getElementById('tcCheck').checked;
+}
+
+function finalSubmit() {
+  toast('🎉 Submitted! Your project has been sent to the IT Review Team.', 'green');
+  document.getElementById('finalSubmitBtn').disabled = true;
+  document.getElementById('finalSubmitBtn').textContent = '✓ Submitted — awaiting review';
+}
+
+// ═══ NAVIGATION ═══
+function goToStep(idx) {
+  if (idx > S.maxUnlocked + 1 && idx > 0) { toast('Complete the current step first', 'orange'); return; }
+  if (idx === 5) populateSubmitMeta();
+
+  STEPS.forEach((id, i) => {
+    const el = document.getElementById(id);
+    el.classList.toggle('active', i === idx);
+  });
+
+  // Progress steps
+  document.querySelectorAll('.prog-step').forEach((el, i) => {
+    el.className = 'prog-step ' + (i < idx ? 'done' : i === idx ? 'active' : '');
+  });
+
+  // Left nav
+  document.querySelectorAll('[id^="lnav-"]').forEach((el, i) => {
+    el.classList.toggle('active', i === idx);
+  });
+  for (let i = 0; i <= 5; i++) {
+    const s = document.getElementById(`ls-${i}`);
+    if (!s) continue;
+    if (i < idx) { s.className = 'lni-status s-done'; s.textContent = '✓'; }
+    else if (i === idx) { s.className = 'lni-status s-active'; s.textContent = '●'; }
+    else { s.className = 'lni-status s-lock'; s.textContent = '🔒'; }
+  }
+
+  S.step = idx;
+  if (idx > S.maxUnlocked) S.maxUnlocked = idx;
+
+  const pct = PCT[idx];
+  document.getElementById('progPct').innerHTML = `${pct}% · <span class="prog-next">Next: ${NEXT[idx] || 'Done!'}</span>`;
+}
+
+// ═══ SESSION SAVE / LOAD ═══
+function saveSession() {
+  const session = { user: S.user, prelim: S.prelim, briefHistory: S.briefHistory, notepad: document.getElementById('notepad').value, step: S.step, maxUnlocked: S.maxUnlocked, ts: new Date().toISOString() };
+  localStorage.setItem('pfizer_dta_session', JSON.stringify(session));
+  toast('Session saved ✓', 'green');
+}
+
+function loadSession() {
+  try {
+    const session = JSON.parse(localStorage.getItem('pfizer_dta_session'));
+    if (!session) { toast('No saved session found', 'orange'); return; }
+    S.user = session.user || {};
+    S.prelim = session.prelim || S.prelim;
+    S.briefHistory = session.briefHistory || [];
+    S.maxUnlocked = session.maxUnlocked || 0;
+    document.getElementById('notepad').value = session.notepad || '';
+    updateNotepadCount();
+    if (S.user.firstName) {
+      document.getElementById('tbUserChip').style.display = 'flex';
+      document.getElementById('tbAvatar').textContent = (S.user.firstName[0] + S.user.lastName[0]).toUpperCase();
+      document.getElementById('tbName').textContent = S.user.firstName;
+    }
+    updateBriefHistory();
+    goToStep(Math.min(session.step || 0, S.maxUnlocked));
+    toast(`Welcome back, ${S.user.firstName || 'User'}!`, 'green');
+  } catch { toast('Could not load session', 'orange'); }
+}
+
+// ═══ NOTEPAD ═══
+document.getElementById('notepad').addEventListener('input', () => { updateNotepadCount(); saveNotepad(); });
+function updateNotepadCount() { document.getElementById('notepadFooter').textContent = document.getElementById('notepad').value.length + ' characters'; }
+function saveNotepad() { localStorage.setItem('pfizer_dta_notepad', document.getElementById('notepad').value); }
+function copyNote() { navigator.clipboard.writeText(document.getElementById('notepad').value).then(() => toast('Copied to clipboard ✓')); }
+function clearNote() { if (confirm('Clear notepad?')) { document.getElementById('notepad').value = ''; updateNotepadCount(); } }
+
+// Load saved notepad
+const savedNote = localStorage.getItem('pfizer_dta_notepad');
+if (savedNote) { document.getElementById('notepad').value = savedNote; updateNotepadCount(); }
+
+// ═══ UTILS ═══
+function v(id) { return document.getElementById(id)?.value || ''; }
+function esc(s) { return s.replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
+function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function formatBotText(t) {
+  return t.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\*(.+?)\*/g,'<em>$1</em>').replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>').replace(/^(.+)$/,'<p>$1</p>');
+}
+
+let toastTimer;
+function toast(msg, type = '') {
+  document.querySelector('.toast')?.remove();
+  clearTimeout(toastTimer);
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.innerHTML = msg;
+  document.body.appendChild(el);
+  toastTimer = setTimeout(() => el.remove(), 3200);
+}
+</script>
+</body>
+</html>
