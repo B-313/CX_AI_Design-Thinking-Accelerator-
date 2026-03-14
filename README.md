@@ -1,21 +1,7 @@
 # CX_AI_Design-Thinking-Accelerator-
 CX AI Challenge for Pharma Company
 
-# Web Builder
-
-## 🛠️ Agent Pipeline
-
-| Agent | Role | Tools (Free/Local) | Trigger |
-|-------|------|--------------------|---------|
-| **1: Chatbot** | Assist humans | Local FAQ JS prompts, rule-based feedback (if/then scripts) | Portal Launch |
-| **2: Brief Builder** | Form → Structured spec | HTML forms → JSON templates, regex validation | User input |
-| **3: Code Generator** | Spec → HTML/CSS | Templated CSS/JS (Pfizer blues: #005EB8 primary), Jinja2 fills | Brief approved |
-| **4: Compliance** | Scan code parallel | WCAG: achecker.ca free API or local regex (alt text, ARIA); ABPI: regex for claims/no off-label | Code ready |
-| **5: Content QA** | Grammar/links parallel | LanguageTool.org free API; Linkchecker GitHub CLI | Code ready |
-
-
-
-# Ideation 
+# Web Builder Ideation 
 
 A. The website must have a mandatory section to capture user details to customise their workspace and save progress. 
 1.	User First Name and Last Name 
@@ -60,3 +46,33 @@ K. Once the user validates final changes, a section for Send to Review Team open
 L. Add "Save/Load Session" in workspace. 
 
 M. Progress bar shows % complete + Status Update.
+
+
+
+Changes:
+Overall Design: 
+1.	layout must be polished, elegant and very easy to read.
+2.	accessibility options. 
+3.	Pfizer blues and white. Blue header, white borders.
+4.	Less icons
+5.	user details inside the left column, on top of sections.
+6.	Progress bar instead sections on the top (colour gradient red to green as it fills like HP, and gives % at the top right).
+7.	Save options inside left column at the bottom with last save checkpoint timestamp.
+8.	The preliminary summary as a header under progress bar instead inside chat.
+9.	Notepad at the bottom right column.
+
+Registration:
+1.	Country code phone number drop down list
+2.	Region setup: Country 
+3.	Company email 
+Brief: 
+1.	The prompt bar should be at the top right column.
+2.	Ai provides a brief, in the middle section page.
+3.	The middle section becomes less a page with text content.
+4.	Like Grammarly, the middle section is where the user makes edits and changes.
+5.	User presses ai review so that ai shares recommendations for the content, highlighting the brief.
+6.	Once user confirms, the ai reloads the brief with the changes until user is satisfied with the brief.  
+Builder:
+1.	The template layout must be canva style polished looking.
+2.	Preview of live website or page must be available.
+3.	A link auto generates once content is automatically populated and appears in a tab on the right.
