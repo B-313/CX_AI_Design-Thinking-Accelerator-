@@ -1801,7 +1801,6 @@ Return ONLY a JSON object with these keys (no markdown, no explanation):
   "accessibilityRequirements": "...",
   "technicalRequirements": "..."
 }`;
- const HF_KEY = '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';
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
